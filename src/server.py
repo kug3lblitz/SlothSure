@@ -1,3 +1,12 @@
+#!/usr/bin/python
+
+'''
+File: server.py
+
+Server management for the data analytics portion of Spinosaurus
+'''
+
+
 from json import dumps, load
 
 from flask import Flask, render_template, request

@@ -81,7 +81,7 @@ def Cerebellum(domain):
 
 # def Slouch(x, y, z):
 
-	# determine what a slouching angle would be
+	# determine what a slouching angle would be;
 	# 'ideal' degrees are between >90 - 135
 	# need calc 3 notes
 

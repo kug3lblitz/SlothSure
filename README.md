@@ -16,3 +16,25 @@ Spinosaurus is an Arduino project that detects changes in orientation at the sho
 - Velcro straps
 - Glue gun
 - Masking tape
+
+## Directory structure:
+
+├── LICENSE
+├── README.md
+└── src
+    ├── backbone
+    │   ├── backbone.py
+    │   ├── Makefile
+    │   ├── testData.txt
+    │   └── testOut.cpp
+    └── tests
+        ├── DigitalAccelerometer_ADXL345
+        │   ├── examples
+        │   │   └── ADXL345_demo_code
+        │   │       ├── ADXL345.cpp
+        │   │       ├── ADXL345_demo_code.ino
+        │   │       └── ADXL345.h
+        │   └── License.txt
+        ├── Makefile
+        └── switch
+            └── switch.ino

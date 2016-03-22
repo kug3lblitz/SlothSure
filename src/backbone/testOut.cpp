@@ -33,12 +33,14 @@ int main() {
             y = roundf(y * 100) / 100;
             z = roundf(z * 100) / 100;
 
-            dataFile << "x=" << x << ", y=" << y << ", z=" << z << std::endl;
+            dataFile << "x=" << x << " y=" << y << " z=" << z << std::endl;
 
         }
 
     }
 
     dataFile.close();
+
+    return 0;
 
 }

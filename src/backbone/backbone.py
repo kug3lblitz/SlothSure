@@ -9,10 +9,12 @@ Backend module to maintain the data analytics portion of Spinosaurus
 from os.path import abspath, dirname, join
 
 
-def FileIO():
+CHART_RANGE = 29.0
+
+def Brainstem():
 
 	'''
-	Imports parsed PDF text.
+	Imports data
 	Input:None
 	Output: text -> data as string
 	'''
@@ -37,6 +39,51 @@ def FileIO():
 	return text
 
 
+def FunnyBone():
+
+	'''
+	Manages data
+	Input: None
+	Output: a lot
+	'''
+
+
+	text = Brainstem().split('\n')[:-1]
+
+	domain = text[-1], text[0], len(text) - 2
+
+	Cerebellum(domain)
+
+	del text[0]
+	del text[-1]
+
+
+
+def Cerebellum(domain):
+
+	'''
+	Manages the time duration of the sensor's use
+	Input: tuple of the 2 endpoints of the range of time
+	Output: time domain evenly divided for a linear chart
+	'''
+
+	upper = domain[0].split()[3].split(':')
+	lower = domain[1].split()[3].split(':')
+	intervals = domain[2]
+
+	hours = float( float(upper[0]) - float(lower[0]) )
+	minutes = float( ( float(upper[1]) - float(lower[1]) ) + ( hours * 60 ) )
+	seconds = float( ( float(upper[2]) - float(lower[2]) ) + ( minutes * 60 ) )
+	intervals = float( seconds / intervals * CHART_RANGE )
+
+	print seconds, intervals
+
+
 # def Slouch(x, y, z):
 
 	# determine what a slouching angle would be
+	# 'ideal' degrees are between >90 - 135
+	# need calc 3 notes
+
+
+FunnyBone()

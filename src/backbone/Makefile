@@ -1,4 +1,4 @@
-CPPFLAGS = -Wall -ansi -g
+CPPFLAGS = -Wall -ansi -g -std=c++11
 
 all: testOut.o
 	g++ $(CPPFLAGS) testOut.o -o Driver.out

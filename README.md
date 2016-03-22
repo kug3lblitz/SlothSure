@@ -19,6 +19,7 @@ Spinosaurus is an Arduino project that detects changes in orientation at the sho
 
 ## Directory structure:
 
+```
 ├── LICENSE
 ├── README.md
 └── src
@@ -38,3 +39,4 @@ Spinosaurus is an Arduino project that detects changes in orientation at the sho
         ├── Makefile
         └── switch
             └── switch.ino
+```

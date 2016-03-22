@@ -1,0 +1,9 @@
+# Python
+.Python
+*.pyc
+.venv/
+
+# C++
+*~
+*.h.gch
+*#

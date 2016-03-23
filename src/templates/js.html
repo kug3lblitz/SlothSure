@@ -13,16 +13,16 @@
 <!-- JavaScript Pie -->
 <script src="{{ url_for('static', filename = 'js/canvasjs.min.js') }}"></script>
 
+<script src="{{ url_for('static', filename = 'js/Chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/Chart.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/gulpfile.js') }}"></script>
+
 <script type="text/javascript">
     window.onload = function () {
 
         var chart = new CanvasJS.Chart("chartContainer",
             {
                 zoomEnabled: true,
-
-                title:{
-                    text: "Stress Test: 100 Data Points" 
-                },
 
                 animationEnabled: true,
 
@@ -47,6 +47,7 @@
     var y = 0;
     var data = []; var dataSeries = { type: "line" };
     var dataPoints = [];
+
     for (var i = 0; i < limit; i += 1) {
         y += (Math.random() * 10 - 5);
         dataPoints.push({
@@ -58,6 +59,3 @@
     data.push(dataSeries);               
 
 </script>
-
-
-}

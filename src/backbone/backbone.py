@@ -6,6 +6,7 @@ File: backbone.py
 Backend module to maintain the data analytics portion of Spinosaurus
 '''
 
+from math import acos, degrees, sqrt
 from os.path import abspath, dirname, join
 
 
@@ -57,6 +58,10 @@ def FunnyBone():
 	del text[0]
 	del text[-1]
 
+	for i in text:
+		# print float(i.split()[0])
+		Slouch( float(i.split()[0]), float(i.split()[1]), float(i.split()[2]) )
+
 
 
 def Cerebellum(domain):
@@ -74,16 +79,26 @@ def Cerebellum(domain):
 	hours = float( float(upper[0]) - float(lower[0]) )
 	minutes = float( ( float(upper[1]) - float(lower[1]) ) + ( hours * 60 ) )
 	seconds = float( ( float(upper[2]) - float(lower[2]) ) + ( minutes * 60 ) )
-	intervals = float( seconds / intervals * CHART_RANGE )
+	# intervals = float( seconds / intervals * CHART_RANGE )
 
 	print seconds, intervals
 
 
-# def Slouch(x, y, z):
+def Slouch(x, y, z):
+
+
+	angle = float( acos( x / sqrt( x**2 + y**2 + z**2 ) ) )
+
+	angle = int( ( (degrees(angle) ) * 100) + 0.5 ) / 100.0
+
+	if (angle < 90 or angle > 135):
+		print "SLOUCH", angle
 
 	# determine what a slouching angle would be;
 	# 'ideal' degrees are between >90 - 135
 	# need calc 3 notes
+
+
 
 
 FunnyBone()

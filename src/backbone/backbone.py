@@ -6,7 +6,7 @@ File: backbone.py
 Backend module to maintain the data analytics portion of Spinosaurus
 '''
 
-from math import acos, degrees, sqrt
+from math import acos, asin, degrees, sqrt, pi, atan2
 from os.path import abspath, dirname, join
 
 
@@ -59,7 +59,6 @@ def FunnyBone():
 	del text[-1]
 
 	for i in text:
-		# print float(i.split()[0])
 		Slouch( float(i.split()[0]), float(i.split()[1]), float(i.split()[2]) )
 
 
@@ -87,12 +86,33 @@ def Cerebellum(domain):
 def Slouch(x, y, z):
 
 
-	angle = float( acos( x / sqrt( x**2 + y**2 + z**2 ) ) )
+	# angle = float( ( x / sqrt( x**2 + y**2 + z**2 ) ) )
 
-	angle = int( ( (degrees(angle) ) * 100) + 0.5 ) / 100.0
+	x = int( (x * 100) + 0.5 ) / 100.0
+	y = int( (y * 100) + 0.5 ) / 100.0
+	z = int( (z * 100) + 0.5 ) / 100.0
 
-	if (angle < 90 or angle > 135):
-		print "SLOUCH", angle
+	# print angle
+
+	# minVal = 265;
+	# maxVal = 402;
+
+	# PI = pi
+
+	# xAng = map(x, minVal, maxVal, -90, 90);
+	# yAng = map(y, minVal, maxVal, -90, 90);
+	# zAng = map(z, minVal, maxVal, -90, 90);
+
+	# x = degrees(atan2(-yAng, -zAng) + PI);
+	# y = degrees(atan2(-xAng, -zAng) + PI);
+	# z = degrees(atan2(-yAng, -xAng) + PI);
+
+
+	if ( x < 90):
+		print "SLOUCH", x, y, z
+
+	# if (angle < 90 or angle > 135):
+	# 	print "NOT SLOUCH", angle
 
 	# determine what a slouching angle would be;
 	# 'ideal' degrees are between >90 - 135

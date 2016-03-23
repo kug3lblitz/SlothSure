@@ -6,13 +6,22 @@ Generates a test output testData.txt for verifying backbone.py
 
 
 #include <chrono> // for sleep
+#include <cmath>
 #include <cstdlib> // for RAND_MAX
 #include <ctime> // for localtime
 #include <fstream> // for file IO
 #include <iostream> // for IO
+#include <map>
 #include <math.h> // for rounding floats
 #include <thread> // for sleep
 
+#define RAD_TO_DEG (180.0/M_PI)
+
+
+long map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 int main() {
 
@@ -26,6 +35,8 @@ int main() {
     // create output file
     std::ofstream dataFile("testData.txt");
 
+    int minVal = 265;
+    int maxVal = 402;
 
     // start writing to file
     if ( dataFile.is_open() ) {
@@ -40,18 +51,30 @@ int main() {
 
 
             // generate random numbers for the axes
-            float x = static_cast<float> (rand())
-                / (static_cast<float> (RAND_MAX / 100));
-            float y = static_cast<float> (rand())
-                / (static_cast<float> (RAND_MAX / 100));
-            float z = static_cast<float> (rand())
-                / (static_cast<float> (RAND_MAX / 100));
+            float x = static_cast<float> ( rand() % (maxVal - minVal) + minVal );
+                // / (static_cast<float> (RAND_MAX / 100));
+            float y = static_cast<float> ( rand() % (maxVal - minVal) + minVal );
 
+            float z = static_cast<float> ( rand() % (maxVal - minVal) + minVal );
+
+            std::cout << x << " " << y << " " << z << std::endl;
 
             // round to the nearest
             x = roundf(x * 100) / 100;
-            y = roundf(y * 100) / 100;
-            z = roundf(z * 100) / 100;
+            // y = roundf(y * 100) / 100;
+            // z = roundf(z * 100) / 100;
+
+
+            int xAng = map(x, minVal, maxVal, -90, 90);
+            int yAng = map(y, minVal, maxVal, -90, 90);
+            int zAng = map(z, minVal, maxVal, -90, 90);
+
+              //Caculate 360deg values like so: atan2(-yAng, -zAng)
+              //atan2 outputs the value of -π to π (radians)
+              //We are then converting the radians to degrees
+            x = RAD_TO_DEG * (atan2(-yAng, -zAng) + M_PI);
+            y = RAD_TO_DEG * (atan2(-xAng, -zAng) + M_PI);
+            z = RAD_TO_DEG * (atan2(-yAng, -xAng) + M_PI);
 
             // output the data
             dataFile << x << " " << y << " " << z << std::endl;

@@ -122,7 +122,6 @@ def Slouch(x, y, z):
 	Output: alerts if a slouch occurs
 	'''
 
-
 	x = Round ( degrees( atan2( -Scale(y), -Scale(z) ) + pi ) )
 	y = Round ( degrees( atan2( -Scale(x), -Scale(z) ) + pi ) )
 	z = Round ( degrees( atan2( -Scale(y), -Scale(x) ) + pi ) )

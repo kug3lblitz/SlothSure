@@ -6,16 +6,20 @@ File: backbone.py
 Backend module to maintain the data analytics portion of Spinosaurus
 '''
 
-from math import acos, asin, degrees, sqrt, pi, atan2
+
+from math import degrees, pi, atan2
 from os.path import abspath, dirname, join
 
 
-CHART_RANGE = 29.0
+UPPER_READ = 402.0
+LOWER_READ = 265.0
+
 
 def Brainstem():
 
 	'''
 	Imports data
+
 	Input:None
 	Output: text -> data as string
 	'''
@@ -44,8 +48,9 @@ def FunnyBone():
 
 	'''
 	Manages data
+
 	Input: None
-	Output: a lot
+	Output: TBD
 	'''
 
 
@@ -62,11 +67,11 @@ def FunnyBone():
 		Slouch( float(i.split()[0]), float(i.split()[1]), float(i.split()[2]) )
 
 
-
 def Cerebellum(domain):
 
 	'''
 	Manages the time duration of the sensor's use
+
 	Input: tuple of the 2 endpoints of the range of time
 	Output: time domain evenly divided for a linear chart
 	'''
@@ -83,41 +88,49 @@ def Cerebellum(domain):
 	print seconds, intervals
 
 
+def Scale(value):
+
+	'''
+	Scales the value to a different range,
+	for use by atan2 - changing from -90 to 90 to 0 - 360 degrees
+
+	Input: axis value
+	Output: the scaled value
+	'''
+
+	return (value - LOWER_READ) * 180 / (UPPER_READ - LOWER_READ) - 90
+
+
+def Round(value):
+
+	'''
+	Rounds the value up to the nearest hundredth
+
+	Input: degree of axis
+	Output: the angle rounded up
+	'''
+
+	return int( (value * 100) + 0.5 ) / 100.0
+
+
 def Slouch(x, y, z):
 
+	'''
+	Determines if the input values suggest a slouch
 
-	# angle = float( ( x / sqrt( x**2 + y**2 + z**2 ) ) )
-
-	x = int( (x * 100) + 0.5 ) / 100.0
-	y = int( (y * 100) + 0.5 ) / 100.0
-	z = int( (z * 100) + 0.5 ) / 100.0
-
-	# print angle
-
-	# minVal = 265;
-	# maxVal = 402;
-
-	# PI = pi
-
-	# xAng = map(x, minVal, maxVal, -90, 90);
-	# yAng = map(y, minVal, maxVal, -90, 90);
-	# zAng = map(z, minVal, maxVal, -90, 90);
-
-	# x = degrees(atan2(-yAng, -zAng) + PI);
-	# y = degrees(atan2(-xAng, -zAng) + PI);
-	# z = degrees(atan2(-yAng, -xAng) + PI);
+	Input: axis values
+	Output: alerts if a slouch occurs
+	'''
 
 
-	if ( x < 90):
+	x = Round ( degrees( atan2( -Scale(y), -Scale(z) ) + pi ) )
+	y = Round ( degrees( atan2( -Scale(x), -Scale(z) ) + pi ) )
+	z = Round ( degrees( atan2( -Scale(y), -Scale(x) ) + pi ) )
+
+	# only one axis should be observed
+	# currently testing
+	if ( x < 80 ):
 		print "SLOUCH", x, y, z
-
-	# if (angle < 90 or angle > 135):
-	# 	print "NOT SLOUCH", angle
-
-	# determine what a slouching angle would be;
-	# 'ideal' degrees are between >90 - 135
-	# need calc 3 notes
-
 
 
 

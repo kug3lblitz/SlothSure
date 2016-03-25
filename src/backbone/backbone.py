@@ -43,7 +43,7 @@ def brainstem():
     return text
 
 
-def funnyBone():
+def funny_bone():
     """Manages data
 
     Input: None
@@ -121,4 +121,4 @@ def slouch(x, y, z):
         print "SLOUCH", x, y, z
 
 
-funnyBone()
+funny_bone()

@@ -28,6 +28,8 @@ src
 │   └── testOut.cpp
 ├── graph.json
 ├── server.py
+├── slouch
+│   └── slouch.ino
 ├── static
 │   └── js
 │       ├── canvasjs.min.js
@@ -48,14 +50,7 @@ src
 │   │   └── radar.html
 │   └── success.html
 └── tests
-    ├── DigitalAccelerometer_ADXL345
-    │   ├── examples
-    │   │   └── ADXL345_demo_code
-    │   │       ├── ADXL345.cpp
-    │   │       ├── ADXL345_demo_code.ino
-    │   │       └── ADXL345.h
-    │   └── License.txt
-    ├── Makefile
-    └── switch
-        └── switch.ino
+    ├── i2c_scanner
+    │   └── i2c_scanner.ino
+    └── Makefile
 ```

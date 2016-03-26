@@ -1,26 +1,13 @@
-#include <cstdlib>
-#include <ctime> // for localtime
-#include <fstream> // for file IO
-#include <iostream>
-
+#include <TimeLib.h> // for current time
 #include <Wire.h>
 #include "ADXL345.h"
 
-#define ROTARY_ANGLE_SENSOR A0
-#define LED 2
-ADXL345 ACCEL;
+int ROTARY_ANGLE_SENSOR = 0; // pin A0
+#define LED 2 // pin D2
+ADXL345 ACCEL; // I2C pin 0x53
 
-std::time_t CURRENT_TIME;
+time_t CURRENT_TIME = now();
 
-/* The following lines were extracted from a test code */
-
-// #define ACCEL (0x53) // I2C port = gnd, vcc, scl and spi pins
-// byte values[6] ;
-// char output[512];
-
-// The minimum and maximum values during callibration
-#define minVal 265
-#define maxVal 402
 
 /* Defines inputs and outputs */
 
@@ -30,7 +17,7 @@ void pins_init() {
     pinMode(LED, OUTPUT);
 
     // output current time and date
-    Serial.println(std::asctime(std::localtime(&CURRENT_TIME)));
+    Serial.println(year(CURRENT_TIME));
 
 }
 
@@ -40,60 +27,41 @@ void pins_init() {
 void slouch() {
 
     double x, y, z;
-    int xRead, yRead,zRead;
+    double g_in_xyz[3];
 
-    // read the ACCELerometer values and store them in variables  x,y,z
-    ACCEL.readXYZ(&xRead, &yRead, &zRead);
+    ACCEL.getAcceleration(g_in_xyz);
+    x = g_in_xyz[0];
+    y = g_in_xyz[1];
+    z = g_in_xyz[2];
 
-    // convert read values to degrees -90 to 90 - needed for atan2
-    int xAng = map(xRead, minVal, maxVal, -90, 90);
-    int yAng = map(yRead, minVal, maxVal, -90, 90);
-    int zAng = map(zRead, minVal, maxVal, -90, 90);
+    float vec_mag =  sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+    float x_ang = acos(x / vec_mag) * 180 / M_PI;
+    float y_ang = acos(y / vec_mag) * 180 / M_PI;
+    float z_ang = acos(z / vec_mag) * 180 / M_PI;
 
-    //Caculate 360 degree values like so: atan2(-yAng, -zAng)
-    //atan2 outputs the value of -π to π (radians)
-    x = RAD_TO_DEG * (atan2(-yAng, -zAng) + PI);
-    y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
-    z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
-
-
-    //Output the calculations
-    Serial.print("x: ");
-    Serial.print(x);
-    Serial.print(" | y: ");
-    Serial.print(y);
-    Serial.print(" | z: ");
-    Serial.println(z);
-
-    // start writing to file
-//    if ( dataFile.is_open() ) {
-//
-//        Serial.print("ayy");
-//
-//        // output current time and date
-//        dataFile << std::asctime(std::localtime(&CURRENT_TIME));
-//
-//            // output the data
-//            dataFile << x << " " << y << " " << z << std::endl;
-//
-//        // get and output new time after data output
-//        CURRENT_TIME = std::time(NULL);
-//        dataFile << std::asctime(std::localtime(&CURRENT_TIME));
-//
-//    }
+    Serial.print("X=");
+    Serial.print(x_ang);
+    Serial.print(" deg");
+    Serial.print(" | Y=");
+    Serial.print(y_ang);
+    Serial.print(" deg");
+    Serial.print(" | Z=");
+    Serial.print(z_ang);
+    Serial.println(" deg");
 
 
-    // if slouch is detected, activate the notfication sensor
-    if (x < 80) {
+    // current notification sensor for testing is an LED
+    if (x_ang < 80.0) {
 
-        // current notificaiton sensor for testing is an LED
+        Serial.println("SLOUCH");
         digitalWrite(LED, 1);
 
     } else {
         digitalWrite(LED, 0);
     }
 
-    delay(500);
+
+    delay(1000);
 
 }
 
@@ -103,32 +71,14 @@ void slouch() {
 void setup() {
 
     // current time
-    CURRENT_TIME = std::time(NULL);
+    //    CURRENT_TIME = std::time(NULL);
 
     // begins the serial monitor
     Serial.begin(9600);
 
     // define the inputs and outputs
     pins_init();
-
-
-    /* The following lines were extracted from a test code */
-
-    // Wire.begin();
-    // Wire.beginTransmission(ACCEL);
-    // Wire.write(0x2D);
-    // Wire.write(0);
-    // Wire.endTransmission();
-    // Wire.beginTransmission(ACCEL);
-    // Wire.write(0x2D);
-    // Wire.write(16);
-    // Wire.endTransmission();
-    // Wire.beginTransmission(ACCEL);
-    // Wire.write(0x2D);
-    // Wire.write(8);
-    // Wire.endTransmission();
-        
-    // ACCEL.powerOn();
+    ACCEL.powerOn();
 
 }
 
@@ -137,39 +87,13 @@ void setup() {
 
 void loop() {
 
-
-    // if the potentiometer != 0, switch is considered on
+    // if the potentiometer > 40, switch is considered on
     int value = analogRead(ROTARY_ANGLE_SENSOR);
 
     // call if switch is on
-    if (value) { slouch(); }
-
-//    dataFile.close();
-    /* The following lines were extracted from a test code */
-
-    // int xyzregister = 0x32;
-    // int x, y, z;
-
-    // Wire.beginTransmission(ACCEL);
-    // Wire.write(xyzregister);
-    // Wire.endTransmission();
-
-    // Wire.beginTransmission(ACCEL);
-    // Wire.requestFrom(ACCEL, 6);
-
-    // int i = 0;
-    // while(Wire.available()){
-    // values[i] = Wire.read();
-    // i++;
-    // }
-    // Wire.endTransmission();
-
-    // x = (((int)values[1]) << 8) | values[0];
-    // y = (((int)values[3])<< 8) | values[2];
-    // z = (((int)values[5]) << 8) | values[4];
-    // sprintf(output, "%d %d %d", x, y, z);
-    // Serial.print(output);
-    // Serial.write(10);
-    // delay(1000); 
+    if (value > 40) {
+        slouch();
+    }
 
 }
+

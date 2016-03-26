@@ -20,37 +20,42 @@ Spinosaurus is an Arduino project that detects changes in orientation at the sho
 ## Directory structure:
 
 ```
-src
-├── backbone
-│   ├── backbone.py
-│   ├── Makefile
-│   ├── testData.txt
-│   └── testOut.cpp
-├── graph.json
-├── server.py
-├── slouch
-│   └── slouch.ino
-├── static
-│   └── js
-│       ├── canvasjs.min.js
-│       ├── Chart.js
-│       ├── Chart.min.js
-│       └── gulpfile.js
-├── templates
-│   ├── js.html
-│   ├── samples
-│   │   ├── bar.html
-│   │   ├── doughnut.color.html
-│   │   ├── doughnut.html
-│   │   ├── line-customTooltips.html
-│   │   ├── line.html
-│   │   ├── pie-customTooltips.html
-│   │   ├── pie.html
-│   │   ├── polar-area.html
-│   │   └── radar.html
-│   └── success.html
+Spinosaurus
+├── pyReqs.txt - PIP version and libraries
+│
+├── src
+│   ├── backbone - data analytics backend
+│   │   ├── backbone.py - main module
+│   │   ├── Makefile
+│   │   ├── testData.txt
+│   │   └── testOut.cpp - generates test outputs
+│   │
+│   ├── graph.json - input for graph
+│   │
+│   ├── sensor - Arduino backend
+│   │   │
+│   │   ├── serial - sensor data logger
+│   │   │   ├── output.txt
+│   │   │   └── serial.pde
+│   │   │
+│   │   └── slouch - board code
+│   │       └── slouch.ino
+│   │
+│   ├── server.py
+│   │
+│   ├── static - frontend
+│   │   └── js
+│   │       ├── canvasjs.min.js
+│   │       ├── Chart.js
+│   │       ├── Chart.min.js
+│   │       └── gulpfile.js
+│   │
+│   └── templates - frontend
+│       ├── js.html
+│       └── success.html
+│
 └── tests
-    ├── i2c_scanner
-    │   └── i2c_scanner.ino
-    └── Makefile
+    └── i2c_scanner - scans for devices in I2C ports
+        └── i2c_scanner.ino
+
 ```

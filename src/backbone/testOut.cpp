@@ -6,6 +6,7 @@ Generates a test output testData.txt for verifying backbone.py
 
 
 #include <chrono> // for sleep
+#include <cstdlib>
 #include <ctime> // for localtime
 #include <fstream> // for file IO
 #include <iostream> // for IO

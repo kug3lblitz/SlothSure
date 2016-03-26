@@ -1,3 +1,8 @@
+#include <cstdlib>
+#include <ctime> // for localtime
+#include <fstream> // for file IO
+#include <iostream>
+
 #include <Wire.h>
 #include "ADXL345.h"
 
@@ -5,6 +10,7 @@
 #define LED 2
 ADXL345 ACCEL;
 
+std::time_t CURRENT_TIME;
 
 /* The following lines were extracted from a test code */
 
@@ -16,13 +22,15 @@ ADXL345 ACCEL;
 #define minVal 265
 #define maxVal 402
 
-
 /* Defines inputs and outputs */
 
 void pins_init() {
 
     pinMode(ROTARY_ANGLE_SENSOR, INPUT);
     pinMode(LED, OUTPUT);
+
+    // output current time and date
+    Serial.println(std::asctime(std::localtime(&CURRENT_TIME)));
 
 }
 
@@ -57,6 +65,23 @@ void slouch() {
     Serial.print(" | z: ");
     Serial.println(z);
 
+    // start writing to file
+//    if ( dataFile.is_open() ) {
+//
+//        Serial.print("ayy");
+//
+//        // output current time and date
+//        dataFile << std::asctime(std::localtime(&CURRENT_TIME));
+//
+//            // output the data
+//            dataFile << x << " " << y << " " << z << std::endl;
+//
+//        // get and output new time after data output
+//        CURRENT_TIME = std::time(NULL);
+//        dataFile << std::asctime(std::localtime(&CURRENT_TIME));
+//
+//    }
+
 
     // if slouch is detected, activate the notfication sensor
     if (x < 80) {
@@ -77,6 +102,8 @@ void slouch() {
 
 void setup() {
 
+    // current time
+    CURRENT_TIME = std::time(NULL);
 
     // begins the serial monitor
     Serial.begin(9600);
@@ -117,7 +144,7 @@ void loop() {
     // call if switch is on
     if (value) { slouch(); }
 
-
+//    dataFile.close();
     /* The following lines were extracted from a test code */
 
     // int xyzregister = 0x32;

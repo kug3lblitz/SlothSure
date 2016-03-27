@@ -57,5 +57,4 @@ Spinosaurus
 └── tests
     └── i2c_scanner - scans for devices in I2C ports
         └── i2c_scanner.ino
-
 ```

@@ -1,4 +1,5 @@
 import json
+from sys import exit
 
 import serial
 
@@ -27,20 +28,25 @@ if __name__ == '__main__':
 	with serial.Serial(portID, 9600, timeout=1) as ser:
 
 		# Loads the file as feedingJSON
-		with open(DATA_FILENAME, mode='wa+') as feedingJson:
+		with open(DATA_FILENAME, mode='a+') as feedingJson:
+			serialized_line = [',']
 
-			try:
+			while ser.is_open:
+				serialized_line = ser.readline().split()
+				if len(serialized_line) > 1:
+					# print(float(serialized_line[0].decode("utf-8")))
 
-				# Continuous loop
-				while True:
+					try:
+						# if len(serialized_line) == 2:
+						ACCEL_DICT['angles']['x-axis'].append(
+							float(serialized_line[0].decode("utf-8")))
+						ACCEL_DICT['angles']['z-axis'].append(
+							float(serialized_line[1].decode("utf-8")))
 
-					while ser.is_open:
-						serialized_line = ser.readline()
-						serialized_line = serialized_line.split()
+						print(ACCEL_DICT)
 
-						if len(serialized_line) == 2:
-							ACCEL_DICT['angles']['x-axis'].append(serialized_line[0])
-							ACCEL_DICT['angles']['z-axis'].append(serialized_line[1])
-
-			except KeyboardInterrupt:
-				feedingJson.write(json.dumps(ACCEL_DICT))
+					# if len(serialized_line) < 1:
+					except:
+						print("yoyoyoyooy\n")
+						feedingJson.write(json.dumps(ACCEL_DICT))
+						exit(0)

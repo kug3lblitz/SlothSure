@@ -1,42 +1,47 @@
+import json
+
 import serial
 
 # NOTE: THIS SERIAL PORT CHANGES DEPENDING YOUR COMPUTER
 portID = "/dev/tty.usbmodem1421"
 
+DATA_FILENAME = "testing.json"
+
 count = 0
 
-recordedDirections = {
-	'x-axis': [],
-	'y-axis': [],
-	'z-axis': []
+ACCEL_DICT = {
+	'coordinates': {
+		'x-axis': [],
+		'y-axis': [],
+		'z-axis': []
+	}
 }
 
-def storingValues(valueOfAxis, nameOfValue):
-	recordedDirections[nameOfValue].append(valueOfAxis)
-
-
+# Default value for debugging, keep
 currentAxis = 0
 
 if __name__ == '__main__':
+
+	# Opens an empty file to preprocess dumping
+	with open(DATA_FILENAME, mode='w') as f:
+		json.dump([], f)
+
+	# Beginning serial input from port
 	with serial.Serial(portID, 9600, timeout=1) as ser:
-		while True:
-			while ser.is_open:
-				line = ser.readline()
 
-				try:
-					currentAxis = float(line)
-					print currentAxis
+		# Loads the file as feedingJSON
+		with open(DATA_FILENAME, mode='wa+') as feedingJson:
 
-				except ValueError:
-					print "Beginning Program!"
+			# Continuous loop
+			while True:
 
-				if line != 0:
-					if count == 0:
-						storingValues(currentAxis, 'x-axis')
-					elif count == 1:
-						storingValues(currentAxis, 'y-axis')
-					elif count == 2:
-						storingValues(currentAxis, 'z-axis')
+				while ser.is_open:
+					serialized_line = ser.readline()
+					serialized_line = serialized_line.split()
 
-				count %= 3
-				count += 1
+					if len(serialized_line) == 3:
+						ACCEL_DICT['coordinates']['x-axis'].append(serialized_line[0])
+						ACCEL_DICT['coordinates']['y-axis'].append(serialized_line[1])
+						ACCEL_DICT['coordinates']['z-axis'].append(serialized_line[2])
+
+						feedingJson.write(json.dumps(ACCEL_DICT))

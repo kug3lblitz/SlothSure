@@ -32,16 +32,19 @@ if __name__ == '__main__':
 		# Loads the file as feedingJSON
 		with open(DATA_FILENAME, mode='wa+') as feedingJson:
 
-			# Continuous loop
-			while True:
+			try:
 
-				while ser.is_open:
-					serialized_line = ser.readline()
-					serialized_line = serialized_line.split()
+				# Continuous loop
+				while True:
 
-					if len(serialized_line) == 3:
-						ACCEL_DICT['coordinates']['x-axis'].append(serialized_line[0])
-						ACCEL_DICT['coordinates']['y-axis'].append(serialized_line[1])
-						ACCEL_DICT['coordinates']['z-axis'].append(serialized_line[2])
+					while ser.is_open:
+						serialized_line = ser.readline()
+						serialized_line = serialized_line.split()
 
-						feedingJson.write(json.dumps(ACCEL_DICT))
+						if len(serialized_line) == 3:
+							ACCEL_DICT['coordinates']['x-axis'].append(serialized_line[0])
+							ACCEL_DICT['coordinates']['y-axis'].append(serialized_line[1])
+							ACCEL_DICT['coordinates']['z-axis'].append(serialized_line[2])
+
+			except KeyboardInterrupt:
+				feedingJson.write(json.dumps(ACCEL_DICT))

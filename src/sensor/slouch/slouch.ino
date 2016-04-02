@@ -38,6 +38,8 @@ void slouch() {
 
   if (!CALIB) {
 
+    // This is what we need to export into JSON
+
     Serial.print(x_ang);
     Serial.print(" ");
     Serial.println(z_ang);
@@ -92,6 +94,8 @@ void loop() {
   // call if switch is on
   if (value > 40) {
     slouch();
+  } else {
+    Serial.println("null");
   }
 
 }

@@ -14,6 +14,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+
 @app.route('/success', methods=['GET', 'POST'])
 def get_json_information():
 
@@ -27,7 +28,12 @@ def get_json_information():
         return render_template('success.html', data=json_obj)
 
 
-################################### main ###################################
+@app.route('/sloth')
+def sloth():
+
+    return render_template('sloth.html')
+
+# ----------------------------- main ----------------------------- #
 
 if __name__ == "__main__":
     app.run(debug = True)

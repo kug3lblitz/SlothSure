@@ -3,19 +3,17 @@
 <html>
 
 <head>
-<title> Spinosaurus </title>
+  <title> stahp slouching!!!!!!11 </title>
 
 </head>
 
 <body>
 
-<h1> Data </h1>
+  <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+  <iframe id="player" class="fullscreen-bg__video" src="https://www.youtube.com/embed/aaqzPMOd_1g?autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
 
+  <script>
 
- <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-	<iframe id="player" width="560" height="315" src="https://www.youtube.com/embed/aaqzPMOd_1g?autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-
-    <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
@@ -28,8 +26,8 @@
       var player;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          height: '315',
-          width: '560',
+          height: '1000',
+          width: '1600',
           videoId: 'aaqzPMOd_1g',
           events: {
             'onReady': onPlayerReady,
@@ -49,11 +47,22 @@
       
       function onPlayerStateChange(event) {
         if (event.data != YT.PlayerState.PLAYING) {
-       		player.seekTo(0,true);
-       		player.playVideo();
-        }
-      }
-    </script>
+         player.seekTo(0,true);
+         player.playVideo();
+       }
+     }
+   </script>
+
+   <style type="text/css">
+     .fullscreen-bg__video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
 </body>
 
 

@@ -1,52 +1,56 @@
 import json
 from sys import exit
-
+from math import pow, sqrt
 import serial
 
 # NOTE: THIS SERIAL PORT CHANGES DEPENDING YOUR COMPUTER
-portID = "/dev/tty.usbmodem1421"
+# portID = "/dev/tty.usbmodem1421"  # for Mac lel
+portID = "/dev/ttyACM0"  # for Linux lel
 
-DATA_FILENAME = "testing.json"
+DATA_FILENAME = "data.json"
 
 ACCEL_DICT = {
-	'angles': {
-		'x-axis': [],
-		'z-axis': []
-	}
+    'angles': {
+        'x-axis': [],
+        'z-axis': []
+    }
 }
 
 # Default value for debugging, keep
-currentAxis = 0
+ghetto_counter = 0
 
 if __name__ == '__main__':
 
-	# Opens an empty file to preprocess dumping
-	with open(DATA_FILENAME, mode='w') as f:
-		json.dump([], f)
+    # Beginning serial input from port
+    with serial.Serial(portID, 9600, timeout=1) as ser:
 
-	# Beginning serial input from port
-	with serial.Serial(portID, 9600, timeout=1) as ser:
+        # Loads the file as feedingJSON
+        with open(DATA_FILENAME, mode='a+') as feedingJson:
 
-		# Loads the file as feedingJSON
-		with open(DATA_FILENAME, mode='a+') as feedingJson:
-			serialized_line = [',']
+            while ser.is_open:
 
-			while ser.is_open:
-				serialized_line = ser.readline().split()
-				if len(serialized_line) > 1:
-					# print(float(serialized_line[0].decode("utf-8")))
+                serialized_line = ser.readline().split()
 
-					try:
-						# if len(serialized_line) == 2:
-						ACCEL_DICT['angles']['x-axis'].append(
-							float(serialized_line[0].decode("utf-8")))
-						ACCEL_DICT['angles']['z-axis'].append(
-							float(serialized_line[1].decode("utf-8")))
+                if "slouch" in serialized_line:
+                    print "ayyyyyyy slouch lmao"
 
-						print(ACCEL_DICT)
+                elif "null" not in serialized_line:
 
-					# if len(serialized_line) < 1:
-					except:
-						print("yoyoyoyooy\n")
-						feedingJson.write(json.dumps(ACCEL_DICT))
-						exit(0)
+                    try:
+                        ACCEL_DICT['angles']['x-axis'].append(
+                            float(serialized_line[0].decode("utf-8")))
+
+                        ACCEL_DICT['angles']['z-axis'].append(
+                            float(serialized_line[1].decode("utf-8")))
+
+                        print(ACCEL_DICT)
+
+                        ghetto_counter += 1
+
+                    except:
+                        continue
+
+                elif "null" in serialized_line and ghetto_counter:
+                    print("Done reading data")
+                    feedingJson.write(json.dumps(ACCEL_DICT))
+                    exit(0)

@@ -61,7 +61,7 @@ void slouch() {
     }
 
 
-    delay(1000);
+    delay(100);
 
 }
 

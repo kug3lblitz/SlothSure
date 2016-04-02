@@ -11,12 +11,23 @@ from json import dumps, load
 
 from flask import Flask, render_template, request
 
+from reader.tacocat import Tacocat
 
 app = Flask(__name__)
 
 
+@app.route('/')
+def home():
+
+    tacocat_obj = Tacocat()
+
+    tacocat_obj.racecar()
+
+    return render_template('home.html')
+
+
 @app.route('/success', methods=['GET', 'POST'])
-def get_json_information():
+def get_info():
 
     if request.method == 'GET':
 
@@ -36,4 +47,4 @@ def sloth():
 # ----------------------------- main ----------------------------- #
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)

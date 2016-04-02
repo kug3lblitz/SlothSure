@@ -3,3 +3,7 @@ itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
 Werkzeug==0.11.4
+ez-setup==0.9
+MarkupSafe==0.23
+pyduino-mk==0.0.2
+pyserial==3.0.1

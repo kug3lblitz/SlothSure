@@ -30,42 +30,18 @@
 
  	   slouch = document.getElementById('slouchPlot');
 
-
-//     Plotly.newPlot(
-//     	slouch,
-//     	[{
-//     		x: timeValues,
-//     		y: angleValues
-//     	}],
-//     	{
-//     		margin: {
-//     			t: 100, l: 100,
-//     			r: 100, b: 100
-//     		},
-// 
-//     		type: "scatter",
-//     		mode: "markers",
-//     		
-//     		title: "Slouchy",
-//     	    bgcolor: "#FFFFFF",
-//     		borderwidth: 2,
-//     		bordercolor: "#333333",
-//     		xaxis: {
-//     			title: "Time (milliseconds)"
-//     		},
-//     		yaxis: {
-//     			title: "Slouch (degrees)"
-//     		}
-//     	});
-
     	var listA = [];
     	var listB = [];
 
     	var listATimeValues = [];
     	var listBTimeValues = [];
+
+
     	var timeIndex = 0;
     	for(var ii = 0; ii < angleValues.length; ii++) {
+    		
     		var angle = angleValues[ii] - initAngle;
+
     		if(angle < -5){
     			listA.push(angle);
     			listATimeValues.push(timeValues[timeIndex]);
@@ -73,13 +49,12 @@
     		}
     		
     		else{
-    			//listA.push(0);
     			listB.push(angle);
     			listBTimeValues.push(timeValues[timeIndex]);
     		}
     		timeIndex++;
     	}
-    	debugger;
+  
     	
     	var trace1 = {
  		 x: listATimeValues,
@@ -92,6 +67,7 @@
 		  textfont: {
 			family:  'Raleway, sans-serif'
 		  },
+		  color: 'red',
 		  marker: { size: 12 }
 		};
 
@@ -106,18 +82,21 @@
 			family:'Times New Roman'
 		  },
 		  textposition: 'bottom center',
+		  color:'blue',
 		  marker: { size: 12 }
 		};
 
 		var data = [ trace1, trace2 ];
 
 		var layout = {
-		 //  xaxis: {
-		//     range: [ 0.75, 5.25 ]
-		//   },
-		//   yaxis: {
-		//     range: [0, 8]
-		//   },
+		   xaxis: {
+		   	   title: "Time (milliseconds)"
+		   },
+		   yaxis: {
+     			title: "Slouch (degrees)"
+
+		   },
+
 		  legend: {
 	
 			yref: 'paper',
@@ -127,7 +106,7 @@
 			  color: 'grey',
 			}
 		  },
-		  title:'Data Labels on the Plot'
+		  title:'Sittin\' like a sloth'
 		};
 
 		Plotly.newPlot('slouchPlot', data, layout);

@@ -36,11 +36,12 @@ def play():
 # /sloth provides a graph that provides data reading on a person's positioning
 @app.route('/success', methods=['GET', 'POST'])
 def get_info():
+
     if request.method == 'GET':
         with open('data.json') as data_file:
             data = load(data_file)
 
-        return render_template('anotherplot.html', data=data)
+        return render_template('success.html', data=data)
 
 
 @app.route('/sloth')

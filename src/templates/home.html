@@ -1,46 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
+<head>
 
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Why are you reading my code?">
-		<meta name="author" content="Sabbir">
-		<link href="{{ url_for('static', filename = 'img/icon.ico') }}">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Why are you reading my code?">
+	<meta name="author" content="Sabbir">
+	<link href="{{ url_for('static', filename = 'img/icon.ico') }}">
 
-		<title>SlothSure | Home</title>
+	<title>SlothSure | Home</title>
 
 
-		{% include 'css.html' %}
+	{% include 'css.html' %}
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+			<![endif]-->
 
-	</head>
+		</head>
 
-	<body id="page-top" class="index">
+		<body id="page-top" class="index">
 
-		{% include 'navbar.html' %}
+			{% include 'navbar.html' %}
 
-		{% include 'header.html' %}
+			{% include 'header.html' %}
+			<!-- Portfolio -->
 
-		{% include 'footer.html' %}
+			<section id="portfolio">
 
-		<!-- Scroll to Top Button -->
-		<div class="scroll-top page-scroll">
-			<a class="btn btn-primary" style="background: transparent; border-color: transparent;" href="#page-top">
-				<i class="fa fa-chevron-up"></i>
-			</a>
+				<div class="container">
+
+					<hr class="name"></hr>
+
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<h2>Upload</h2>
+							<hr class="wrench">
+						</div>
+					</div>
+
+					<div class="row">
+						<!-- Empty placeholder -->
+						<div class="col-sm-4 portfolio-item">
+							<div class="caption">
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-4 portfolio-item">
+						<a href="#sirworm" class="portfolio-link" data-toggle="modal">
+							<div class="caption">
+								<div class="caption-content">
+									About
+								</div>
+							</div>
+							<img src="{{ url_for('static', filename = 'img/button.png') }}" class="img-responsive" alt="">
+
+						</a>
+					</div>
+					<!-- Empty placeholder -->
+					<div class="col-sm-4 portfolio-item">
+						<div class="caption">
+						</div>
+					</a>
+				</div>
+			</div>
+
 		</div>
+	</div>
 
-	</body>
+	<div class="svg-wrapper" style="display: block; margin-left: auto; margin-right: auto;">
+		<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+			<rect id="shape" height="40" width="150" /></rect>
+			<div id="text" data-dismiss="modal">
+				<a href="/play">
+					<span class="spot"></span>
+					<i class="fa fa-cogs"></i>
+					Sloth me up!
+				</a>
+			</div>
+		</svg>
+	</div>
 
-	{% include 'js.html' %}
+</section>
+{% include 'footer.html' %}
+
+<!-- Scroll to Top Button -->
+<div class="scroll-top page-scroll">
+	<a class="btn btn-primary" style="background: transparent; border-color: transparent;" href="#page-top">
+		<i class="fa fa-chevron-up"></i>
+	</a>
+</div>
+
+</body>
+
+{% include 'js.html' %}
 
 </html>

@@ -17,48 +17,121 @@
 
 
 	<script>
+	
+	
 		var input_data = {{ data|tojson }};
 
 		var angleValues = input_data["angle_mag"];
 		var timeValues = input_data["time"];
 		var initAngle = angleValues[0];
 
-		for (var angle in angleValues) {
-        // Slouch Difference
-        angleValues[angle] = angleValues[angle] - initAngle;
-    }
 
-    console.log(angleValues);
+    	console.log(angleValues);
+
+ 	   slouch = document.getElementById('slouchPlot');
 
 
-    slouch = document.getElementById('slouchPlot');
+//     Plotly.newPlot(
+//     	slouch,
+//     	[{
+//     		x: timeValues,
+//     		y: angleValues
+//     	}],
+//     	{
+//     		margin: {
+//     			t: 100, l: 100,
+//     			r: 100, b: 100
+//     		},
+// 
+//     		type: "scatter",
+//     		mode: "markers",
+//     		
+//     		title: "Slouchy",
+//     	    bgcolor: "#FFFFFF",
+//     		borderwidth: 2,
+//     		bordercolor: "#333333",
+//     		xaxis: {
+//     			title: "Time (milliseconds)"
+//     		},
+//     		yaxis: {
+//     			title: "Slouch (degrees)"
+//     		}
+//     	});
 
+    	var listA = [];
+    	var listB = [];
 
-    Plotly.plot(
-    	slouch,
-    	[{
-    		x: timeValues,
-    		y: angleValues
-    	}],
-    	{
-    		margin: {
-    			t: 100, l: 100,
-    			r: 100, b: 100
-    		},
-
-    		{#                type: "box",#}
-    		{#                boxmean: true,#}
-    		title: "Slouchy",
-    		{#                bgcolor: "#000000",#}
-    		{#                borderwidth: 2,#}
-    		{#                bordercolor: "",#}
-    		xaxis: {
-    			title: "Time (milliseconds)"
-    		},
-    		yaxis: {
-    			title: "Slouch (degrees)"
+    	var listATimeValues = [];
+    	var listBTimeValues = [];
+    	var timeIndex = 0;
+    	for(var ii = 0; ii < angleValues.length; ii++) {
+    		var angle = angleValues[ii] - initAngle;
+    		if(angle < -5){
+    			listA.push(angle);
+    			listATimeValues.push(timeValues[timeIndex]);
+    			// listB.push(0);
     		}
-    	});
+    		
+    		else{
+    			//listA.push(0);
+    			listB.push(angle);
+    			listBTimeValues.push(timeValues[timeIndex]);
+    		}
+    		timeIndex++;
+    	}
+    	debugger;
+    	
+    	var trace1 = {
+ 		 x: listATimeValues,
+ 		 y: listA,
+		  mode: 'markers+text',
+		  type: 'scatter',
+		  name: 'Slouch Points',
+		//   text: ['A-1', 'A-2', 'A-3', 'A-4', 'A-5'],
+		  textposition: 'top center',
+		  textfont: {
+			family:  'Raleway, sans-serif'
+		  },
+		  marker: { size: 12 }
+		};
+
+		var trace2 = {
+		  x: listBTimeValues,
+		  y: listB,
+		  mode: 'markers+text',
+		  type: 'scatter',
+		  name: 'Good Posture',
+		 // text: ['B-a', 'B-b', 'B-c', 'B-d', 'B-e'],
+		  textfont : {
+			family:'Times New Roman'
+		  },
+		  textposition: 'bottom center',
+		  marker: { size: 12 }
+		};
+
+		var data = [ trace1, trace2 ];
+
+		var layout = {
+		 //  xaxis: {
+		//     range: [ 0.75, 5.25 ]
+		//   },
+		//   yaxis: {
+		//     range: [0, 8]
+		//   },
+		  legend: {
+	
+			yref: 'paper',
+			font: {
+			  family: 'Arial, sans-serif',
+			  size: 20,
+			  color: 'grey',
+			}
+		  },
+		  title:'Data Labels on the Plot'
+		};
+
+		Plotly.newPlot('slouchPlot', data, layout);
+
     </script>
 
 </body>

@@ -12,16 +12,17 @@ class Tacocat(object):
         # self.portID = "/dev/tty.usbmodem1421"  # for Mac lel
         self.portID = "/dev/ttyACM0"  # for Linux lel
 
-        self.DATA_FILENAME = "data.json"
+        self.DATA_FILENAME = "../data.json"
 
         self.ACCEL_DICT = {
+            'time': [],
             'angle_mag': []
         }
 
         # Default value for debugging, keep
         self.ghetto_counter = 0
 
-    # if __name__ == '__main__':
+        self.timer = 0
 
     def racecar(self):
 
@@ -51,7 +52,9 @@ class Tacocat(object):
                             print(axis_mag)
 
                             self.ACCEL_DICT['angle_mag'].append(axis_mag)
+                            self.ACCEL_DICT['time'].append(self.timer)
 
+                            self.timer += 500
                             self.ghetto_counter += 1
 
                         except Exception as e:
@@ -62,3 +65,6 @@ class Tacocat(object):
                         print("Done reading data")
                         feedingJson.write(json.dumps(self.ACCEL_DICT))
                         break
+
+# for testing
+# Tacocat().racecar()

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Why are you reading my code?">
+		<meta name="author" content="Sabbir">
+		<link href="{{ url_for('static', filename = 'img/icon.ico') }}">
+
+		<title>SlothSure | Home</title>
+
+
+		{% include 'css.html' %}
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body id="page-top" class="index">
+
+		{% include 'navbar.html' %}
+
+		{% include 'header.html' %}
+
+		{% include 'footer.html' %}
+
+		<!-- Scroll to Top Button -->
+		<div class="scroll-top page-scroll">
+			<a class="btn btn-primary" style="background: transparent; border-color: transparent;" href="#page-top">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+		</div>
+
+	</body>
+
+	{% include 'js.html' %}
+
+</html>

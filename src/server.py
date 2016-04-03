@@ -16,9 +16,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-	tacocat_obj = Tacocat()
-
-	tacocat_obj.racecar()
+	# tacocat_obj = Tacocat()
+	#
+	# tacocat_obj.racecar()
 
 	return render_template('home.html')
 
@@ -26,12 +26,12 @@ def home():
 @app.route('/success', methods=['GET', 'POST'])
 def get_info():
 	if request.method == 'GET':
-		with open('graph.json') as data_file:
+		with open('data.json') as data_file:
 			data = load(data_file)
 
-		json_obj = dumps(data)
+		# json_obj = dumps(data)
 
-		return render_template('success.html', data=json_obj)
+		return render_template('anotherplot.html', data=data)
 
 
 @app.route('/sloth')

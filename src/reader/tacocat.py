@@ -12,7 +12,7 @@ class Tacocat(object):
         # self.portID = "/dev/tty.usbmodem1421"  # for Mac lel
         self.portID = "/dev/ttyACM0"  # for Linux lel
 
-        self.DATA_FILENAME = "../data.json"
+        self.DATA_FILENAME = "data.json"
 
         self.ACCEL_DICT = {
             'time': [],
@@ -57,8 +57,8 @@ class Tacocat(object):
                             self.timer += 500
                             self.ghetto_counter += 1
 
-                        except Exception as e:
-                            print("Exception yo fix dis", e)
+                        except Exception:
+                            print("Counting down...")
                             continue
 
                     elif "null" in serialized_line and self.ghetto_counter:

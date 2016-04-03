@@ -24,30 +24,38 @@
 
 		</head>
 
-			{% include 'header.html' %}
-			<!-- Portfolio -->
+		{% include 'header.html' %}
+		<!-- Portfolio -->
 
-			<section id="portfolio">
+		<section id="portfolio">
 
-				<div class="svg-wrapper" style="display: block; margin-left: auto; margin-right: auto;">
-					<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-						<rect id="shape" height="40" width="150" /></rect>
-						<div id="text" data-dismiss="modal">
-							<a href="/play">
-								<span class="spot"></span>
-								<i class="fa fa-cogs"></i>
-								Sloth me up!
-							</a>
-						</div>
-					</svg>
-				</div>
+			<div class="svg-wrapper" style="display: block; margin-left: auto; margin-right: auto;">
+				<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+					<rect id="shape" height="40" width="150" /></rect>
+					<div id="text" data-dismiss="modal">
+						<a href="/play" onClick="myFunction()">
+							<span class="spot"></span>
+							<i class="fa fa-cogs"></i>
+							Sloth me up!
+						</a>
+					</div>
+				</svg>
+			</div>
 
-			</section>
+		</section>
 
-			{% include 'footer.html' %}
+<!-- 		<a href="javascript:void(0)" class="footer-tooltip" style="font-size: 20px; color: #000;" data-toggle="tooltip" title="ortezriverana@gmail.com" onClick="myFunctionlol">Ana Ortez-Rivera</a> of University of Maryland, College Park.
+-->
+{% include 'footer.html' %}
 
-		</body>
+</body>
 
-		{% include 'js.html' %}
+<script>
+	function myFunction() {
+		confirm("Your posture is being tracked! Press any button to exit! We don't really know much JavaScript...");
+	}
+</script>
 
-		</html>
+{% include 'js.html' %}
+
+</html>

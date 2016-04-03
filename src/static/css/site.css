@@ -81,29 +81,23 @@ hr.lightbulb {
     text-align: center;
 }
 
-hr.wrench,
-hr.lightbulb {
+hr.wrench {
     border-color: #fff;
 }
 
-hr.wrench:after,
-hr.lightbulb:after {
+hr.wrench:after {
     display: inline-block;
     position: relative;
     top: -.8em;
     padding: 0 .25em;
     font-family: FontAwesome;
     font-size: 3em;
-    background-color: #4a494a;
+    background-color: #163E8C;
     color: #14af4b;
 }
 
 hr.wrench:after {
-    content: "\f0ad";
-}
-
-hr.lightbulb:after {
-    content: "\f0eb";
+    content: "\f06c";
 }
 
 .img-centered {

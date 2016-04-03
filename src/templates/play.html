@@ -1,14 +1,81 @@
-<!DOCTYPE HTML>
-
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-</head>
 
-<body>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Why are you reading my code?">
+	<meta name="author" content="Sabbir">
+	<link href="{{ url_for('static', filename = 'img/icon.png') }}">
 
+	<title>Data reading done!</title>
+
+
+	{% include 'css.html' %}
+	{% include 'js.html' %}
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+
+
+
+		</head>
+
+		<body>
+
+			<section class="success">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-lg-12">
+							<h1 class="text-center">Am I sloth'n?</h1>
+							<hr class="wrench">
+						</div>
+						<div class="row">
+							<!-- Empty placeholder -->
+							<div class="col-sm-4 portfolio-item">
+								<div class="caption">
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-4 portfolio-item">
+							<a href="/success" class="portfolio-link" data-toggle="modal">
+								<img src="{{ url_for('static', filename = 'img/sloth_again.png') }}" class="img-responsive" alt="">
+
+							</a>
+						</div>
+						<!-- Empty placeholder -->
+						<div class="col-sm-4 portfolio-item">
+							<div class="caption">
+							</div>
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+
+
+<!-- 
+	<script>
+		function stateChange(newState) {
+			setTimeout(function () {
+				$(location).attr('href', 'http://localhost:5000/success');
+			}, 30);
+		}
+
+		stateChange();
+	</script>
+ -->
 
 </body>
+
 
 </html>

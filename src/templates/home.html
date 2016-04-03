@@ -24,81 +24,30 @@
 
 		</head>
 
-		<body id="page-top" class="index">
-
-			{% include 'navbar.html' %}
-
 			{% include 'header.html' %}
 			<!-- Portfolio -->
 
 			<section id="portfolio">
 
-				<div class="container">
-
-					<hr class="name"></hr>
-
-					<div class="row">
-						<div class="col-lg-12 text-center">
-							<h2>Upload</h2>
-							<hr class="wrench">
+				<div class="svg-wrapper" style="display: block; margin-left: auto; margin-right: auto;">
+					<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+						<rect id="shape" height="40" width="150" /></rect>
+						<div id="text" data-dismiss="modal">
+							<a href="/play">
+								<span class="spot"></span>
+								<i class="fa fa-cogs"></i>
+								Sloth me up!
+							</a>
 						</div>
-					</div>
-
-					<div class="row">
-						<!-- Empty placeholder -->
-						<div class="col-sm-4 portfolio-item">
-							<div class="caption">
-							</div>
-						</a>
-					</div>
-					<div class="col-sm-4 portfolio-item">
-						<a href="#sirworm" class="portfolio-link" data-toggle="modal">
-							<div class="caption">
-								<div class="caption-content">
-									About
-								</div>
-							</div>
-							<img src="{{ url_for('static', filename = 'img/button.png') }}" class="img-responsive" alt="">
-
-						</a>
-					</div>
-					<!-- Empty placeholder -->
-					<div class="col-sm-4 portfolio-item">
-						<div class="caption">
-						</div>
-					</a>
+					</svg>
 				</div>
-			</div>
 
-		</div>
-	</div>
+			</section>
 
-	<div class="svg-wrapper" style="display: block; margin-left: auto; margin-right: auto;">
-		<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-			<rect id="shape" height="40" width="150" /></rect>
-			<div id="text" data-dismiss="modal">
-				<a href="/play">
-					<span class="spot"></span>
-					<i class="fa fa-cogs"></i>
-					Sloth me up!
-				</a>
-			</div>
-		</svg>
-	</div>
+			{% include 'footer.html' %}
 
-</section>
+		</body>
 
-{% include 'footer.html' %}
+		{% include 'js.html' %}
 
-<!-- Scroll to Top Button -->
-<div class="scroll-top page-scroll">
-	<a class="btn btn-primary" style="background: transparent; border-color: transparent;" href="#page-top">
-		<i class="fa fa-chevron-up"></i>
-	</a>
-</div>
-
-</body>
-
-{% include 'js.html' %}
-
-</html>
+		</html>

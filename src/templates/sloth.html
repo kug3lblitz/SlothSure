@@ -3,66 +3,68 @@
 <html>
 
 <head>
-  <title> stahp slouching!!!!!!11 </title>
+    <title> stahp slouching!!!!!!11 </title>
 
 </head>
 
 <body>
 
-  <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-  <iframe id="player" class="fullscreen-bg__video" src="https://www.youtube.com/embed/aaqzPMOd_1g?autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+<iframe id="player" class="fullscreen-bg__video"
+        src="https://www.youtube.com/embed/aaqzPMOd_1g?autoplay=1&enablejsapi=1"
+        frameborder="0" allowfullscreen></iframe>
 
-  <script>
+<script>
 
-      // 2. This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
 
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      // 3. This function creates an <iframe> (and YouTube player)
-      //    after the API code downloads.
-      var player;
-      function onYouTubeIframeAPIReady() {
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          height: '1000',
-          width: '1600',
-          videoId: 'aaqzPMOd_1g',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
+            height: '1000',
+            width: '1600',
+            videoId: 'aaqzPMOd_1g',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
         });
-      }
-
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
-
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      
-      function onPlayerStateChange(event) {
-        if (event.data != YT.PlayerState.PLAYING) {
-         player.seekTo(0,true);
-         player.playVideo();
-       }
-     }
-
-   </script>
-
-   <style type="text/css">
-     .fullscreen-bg__video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
     }
-  </style>
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+
+    function onPlayerStateChange(event) {
+        if (event.data != YT.PlayerState.PLAYING) {
+            player.seekTo(0, true);
+            player.playVideo();
+        }
+    }
+
+</script>
+
+<style type="text/css">
+    .fullscreen-bg__video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
 
 </body>
 

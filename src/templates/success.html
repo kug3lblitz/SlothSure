@@ -3,32 +3,28 @@
 
 <html>
 
-	<head>
+<head>
 
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-	</head>
+</head>
 
-	<body>
-		<div id="slouchPlot" style="width:600px;height:250px;"></div>
+<body>
+<div id="tester" style="width:600px;height:250px;"></div>
 
 
-		<script>
+<script>
 
-			var input_data = {{ data|tojson }};
+    TESTER = document.getElementById('tester');
+    Plotly.plot(TESTER, [{
+        x: [1, 2, 3, 4, 5],
+        y: [1, 2, 4, 8, 16]
+    }], {
+        margin: {t: 0}
+    });
 
-			console.log(input_data);
-		
-			slouch = document.getElementById('slouchPlot');
-			Plotly.plot( slouch, [{
-				x:input_data[0],
-				y:input_data[1]
-			}], {
-				margin : {t: 0}	
-			 });
+</script>
 
-		</script>
-
-	</body>
+</body>
 
 </html>

@@ -10,16 +10,18 @@
 	</head>
 
 	<body>
-		<div id="tester" style="width:600px;height:250px;"></div>
+		<div id="slouchPlot" style="width:600px;height:250px;"></div>
 
 
 		<script>
 
-			TESTER = document.getElementById('tester');
-			Plotly.plot( TESTER, [{
-				x: [1, 2, 3, 4, 5],
-				y: [1, 2, 4, 8, 16] }], {
-					margin: { t: 0 } } );
+			slouch = document.getElementById('slouchPlot');
+			Plotly.plot( slouch, [{
+				x:data[0],
+				y:data[1]
+			}], {
+				margin : {t: 0}	
+			 });
 
 		</script>
 

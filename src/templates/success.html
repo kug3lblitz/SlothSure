@@ -15,6 +15,9 @@
 
 		<script>
 
+			var data1 = {{data|tojson}};
+			var data = JSON.parse(data1);
+		
 			slouch = document.getElementById('slouchPlot');
 			Plotly.plot( slouch, [{
 				x:data[0],

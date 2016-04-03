@@ -31,12 +31,12 @@ def get_info():
 
     if request.method == 'GET':
 
-        with open('graph.json') as data_file:
+        with open('data.json') as data_file:
             data = load(data_file)
 
         json_obj = dumps(data)
 
-        return render_template('success.html', data=json_obj)
+        return render_template('anotherplot.html', data=json_obj)
 
 
 @app.route('/sloth')

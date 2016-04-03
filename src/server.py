@@ -29,6 +29,8 @@ def play():
 
     tacocat_obj.racecar()
 
+    return render_template('playing.html')
+
 
 # Transform to get_info
 # /sloth provides a graph that provides data reading on a person's positioning

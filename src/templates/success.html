@@ -15,13 +15,14 @@
 
 		<script>
 
-			var data1 = {{data|tojson}};
-			var data = JSON.parse(data1);
+			var input_data = {{ data|tojson }};
+
+			console.log(input_data);
 		
 			slouch = document.getElementById('slouchPlot');
 			Plotly.plot( slouch, [{
-				x:data[0],
-				y:data[1]
+				x:input_data[0],
+				y:input_data[1]
 			}], {
 				margin : {t: 0}	
 			 });

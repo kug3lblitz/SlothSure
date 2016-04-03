@@ -65,6 +65,3 @@ class Tacocat(object):
                         print("Done reading data")
                         feedingJson.write(json.dumps(self.ACCEL_DICT))
                         break
-
-# for testing
-# Tacocat().racecar()

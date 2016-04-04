@@ -5,7 +5,7 @@
 
 <head>
 
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	{% include 'js.html' %}
 
 </head>
 
@@ -17,8 +17,8 @@
 
 
 	<script>
-	
-	
+
+
 		var input_data = {{ data|tojson }};
 
 		var angleValues = input_data["angle_mag"];
@@ -26,9 +26,9 @@
 		var initAngle = angleValues[0];
 
 
-    	console.log(angleValues);
+    	// console.log(angleValues);
 
- 	   slouch = document.getElementById('slouchPlot');
+    	slouch = document.getElementById('slouchPlot');
 
     	var listA = [];
     	var listB = [];
@@ -38,78 +38,76 @@
 
 
     	var timeIndex = 0;
-    	for(var ii = 0; ii < angleValues.length; ii++) {
-    		
+    	for (var ii = 0; ii < angleValues.length; ii++) {
+
     		var angle = angleValues[ii] - initAngle;
 
-    		if(angle < -5){
+    		if (angle < -5) {
     			listA.push(angle);
-    			listATimeValues.push(timeValues[timeIndex]);
-    			// listB.push(0);
+    			listATimeValues.push(timeValues[timeIndex]/1000);
     		}
     		
-    		else{
+    		else {
     			listB.push(angle);
-    			listBTimeValues.push(timeValues[timeIndex]);
+    			listBTimeValues.push(timeValues[timeIndex]/1000);
     		}
+
     		timeIndex++;
     	}
-  
+
     	
     	var trace1 = {
- 		 x: listATimeValues,
- 		 y: listA,
-		  mode: 'markers+text',
-		  type: 'scatter',
-		  name: 'Slouch Points',
-		//   text: ['A-1', 'A-2', 'A-3', 'A-4', 'A-5'],
-		  textposition: 'top center',
-		  textfont: {
-			family:  'Raleway, sans-serif'
-		  },
-		  color: 'red',
-		  marker: { size: 12 }
-		};
+    		x: listATimeValues,
+    		y: listA,
+    		mode: 'markers+text',
+    		type: 'scatter',
+    		name: 'Slouch Points',
+    		textposition: 'top center',
+    		textfont: {
+    			family:  'Raleway, sans-serif'
+    		},
+    		color: 'red',
+    		marker: { size: 12 }
+    	};
 
-		var trace2 = {
-		  x: listBTimeValues,
-		  y: listB,
-		  mode: 'markers+text',
-		  type: 'scatter',
-		  name: 'Good Posture',
-		 // text: ['B-a', 'B-b', 'B-c', 'B-d', 'B-e'],
-		  textfont : {
-			family:'Times New Roman'
-		  },
-		  textposition: 'bottom center',
-		  color:'blue',
-		  marker: { size: 12 }
-		};
+    	var trace2 = {
+    		x: listBTimeValues,
+    		y: listB,
+    		mode: 'markers+text',
+    		type: 'scatter',
+    		name: 'Good Posture',
+    		textfont : {
+    			family:'Times New Roman'
+    		},
+    		textposition: 'bottom center',
+    		color:'blue',
+    		marker: { size: 12 }
+    	};
 
-		var data = [ trace1, trace2 ];
+    	var data = [ trace1, trace2 ];
 
-		var layout = {
-		   xaxis: {
-		   	   title: "Time (milliseconds)"
-		   },
-		   yaxis: {
-     			title: "Slouch (degrees)"
+    	var layout = {
+    		xaxis: {
+    			title: "Time (seconds)"
+    		},
+    		yaxis: {
+    			title: "Slouch (degrees)"
 
-		   },
+    		},
 
-		  legend: {
-	
-			yref: 'paper',
-			font: {
-			  family: 'Arial, sans-serif',
-			  size: 20,
-			  color: 'grey',
-			}
-		  },
-		  title:'Sittin\' like a sloth'
-		};
+    		legend: {
 
-		Plotly.newPlot('slouchPlot', data, layout);
+    			yref: 'paper',
+    			font: {
+    				family: 'Arial, sans-serif',
+    				size: 20,
+    				color: 'grey',
+    			}
+    		},
+    		title:'Sittin\' like a sloth'
+    	};
+
+    	Plotly.newPlot('slouchPlot', data, layout);
 
     </script>
 
